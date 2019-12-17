@@ -1,10 +1,26 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
+
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 class TodoApp extends Component {
+
     render() {
         return (
-            <div className="TodoApp"><LoginComponent /></div>
+            <div className="TodoApp">
+                <Router>
+                    <Route path="/" component={LoginComponent} />
+                    <Route path="/login" component={LoginComponent} />
+                    <Route path="/welcome" component={WelcomeComponent} />
+                </Router>
+            </div>
         )
+    }
+}
+
+
+class WelcomeComponent extends Component {
+    render() {
+        return <div> Welcome </div>
     }
 }
 
