@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 class TodoApp extends Component {
 
@@ -8,13 +8,20 @@ class TodoApp extends Component {
         return (
             <div className="TodoApp">
                 <Router>
-                    <Route path="/" exact component={LoginComponent} />
-                    <Route path="/login" component={LoginComponent} />
-                    <Route path="/welcome" component={WelcomeComponent} />
+                    <Switch>
+                        <Route path="/" exact component={LoginComponent} />
+                        <Route path="/login" component={LoginComponent} />
+                        <Route path="/welcome" component={WelcomeComponent} />
+                        <Route component={ErrorComponent} />
+                    </Switch>
                 </Router>
             </div>
         )
     }
+}
+
+function ErrorComponent() {
+    return <div>Error. The URL is not correct!</div>
 }
 
 
