@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom'
 
 class TodoApp extends Component {
 
@@ -28,7 +28,7 @@ function ErrorComponent() {
 
 class WelcomeComponent extends Component {
     render() {
-        return <div> Welcome {this.props.match.params.name} </div>
+        return <div> Welcome {this.props.match.params.name}. You can manage your todos <Link to="/todos"> here </Link> </div>
     }
 }
 
@@ -38,9 +38,9 @@ class ListTodosComponent extends Component {
         this.state = {
             todos:
                 [
-                    { id: 1, description: 'Learn React' },
-                    { id: 2, description: 'Learn Spring' },
-                    { id: 3, description: 'Learn AWS' }
+                    { id: 1, description: 'Learn React', done: false, targetDate: new Date() },
+                    { id: 2, description: 'Learn Spring', done: false, targetDate: new Date() },
+                    { id: 3, description: 'Learn AWS', done: false, targetDate: new Date() }
                 ]
         }
 
@@ -55,15 +55,19 @@ class ListTodosComponent extends Component {
                         <tr>
                             <th>Id</th>
                             <th>Description</th>
+                            <th>Done</th>
+                            <th>Target Date</th>
                         </tr>
                     </thead>
                     <tbody>
                         {
                             this.state.todos.map(
                                 todo =>
-                                    <tr>
+                                    <tr key={todo.id}>
                                         <td>{todo.id}</td>
                                         <td>{todo.description}</td>
+                                        <td>{todo.done.toString()}</td>
+                                        <td>{todo.targetDate.toString()}</td>
                                     </tr>
                             )
                         }
