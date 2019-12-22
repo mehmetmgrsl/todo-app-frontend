@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 import TodoApp from './components/todo/TodoApp';
-import './bootstrap.css'
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 class App extends Component {
   render() {
