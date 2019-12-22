@@ -4,6 +4,10 @@ class AuthenticationService {
         console.log('register successfully login')
     }
 
+    logout() {
+        sessionStorage.removeItem('authenticatedUser')
+    }
+
 }
 
 export default new AuthenticationService()
