@@ -10,7 +10,16 @@ class HelloWorldService {
     }
 
     executeHelloWorldPathVariableService(name) {
-        return axios.get(`http://localhost:8080/hello-world/path-variable/${name}`)
+        let username = "test"
+        let password = "test"
+
+        let basisAuthHeader = 'Basic' + window.btoa(username + ":" + password)
+
+        return axios.get(`http://localhost:8080/hello-world/path-variable/${name}`, {
+            headers: {
+                authorization: basisAuthHeader
+            }
+        })
     }
 }
 
