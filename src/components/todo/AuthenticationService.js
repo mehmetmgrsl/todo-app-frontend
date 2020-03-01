@@ -1,22 +1,25 @@
 import axios from 'axios';
+import { API_URL } from '../../../src/Constants'
+
+export const USER_NAME_SESSION_ATTRIBUTE = 'authenticatedUser';
 
 class AuthenticationService {
     executeBasicAuthenticationService(username, password) {
         console.log(username)
         console.log(password)
-        return axios.get("http://localhost:8080/basicauth",
+        return axios.get(`${API_URL}/basicauth`,
             { headers: { authorization: this.createBasicAuthToken(username, password) } })
     }
 
     executeJwtAuthenticationService(username, password) {
         console.log(username)
         console.log(password)
-        return axios.post("http://localhost:8080/authenticate",
+        return axios.post(`${API_URL}/authenticate`,
             { username, password })
     }
 
     registerSuccessfullLoginForJwt(username, token) {
-        sessionStorage.setItem('authenticatedUser', username)
+        sessionStorage.setItem(USER_NAME_SESSION_ATTRIBUTE, username)
         this.setupAxiosInterceptors(this.createJWTToken(token))
     }
 
@@ -29,12 +32,12 @@ class AuthenticationService {
     }
 
     registerSuccessfullLogin(username, password) {
-        sessionStorage.setItem('authenticatedUser', username)
+        sessionStorage.setItem(USER_NAME_SESSION_ATTRIBUTE, username)
         this.setupAxiosInterceptors(this.createBasicAuthToken(username, password))
     }
 
     logout() {
-        sessionStorage.removeItem('authenticatedUser')
+        sessionStorage.removeItem(USER_NAME_SESSION_ATTRIBUTE)
     }
 
     isUserLoggedIn() {
